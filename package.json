@@ -1,0 +1,29 @@
+{
+  "name": "sls-promise",
+  "main": "index.js",
+  "version": "0.0.0",
+  "description": "Minimal promise-based responses for serverless. Return JSON or full response.",
+  "license": "MIT",
+  "repository": "ajoslin/sls-promise",
+  "author": {
+    "name": "Andrew Joslin",
+    "email": "andrewtjoslin@gmail.com",
+    "url": "ajoslin.com"
+  },
+  "scripts": {
+    "test": "standard && tape test.js"
+  },
+  "keywords": [
+    "serverless",
+    "promised",
+    "json"
+  ],
+  "devDependencies": {
+    "tape": "^4.0.0",
+    "standard": "^7.0.0"
+  },
+  "files": [
+    "index.js",
+    "test.js"
+  ]
+}
