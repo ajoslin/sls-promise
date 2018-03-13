@@ -21,9 +21,5 @@
   "devDependencies": {
     "tape": "^4.0.0",
     "standard": "^7.0.0"
-  },
-  "files": [
-    "index.js",
-    "test.js"
-  ]
+  }
 }
