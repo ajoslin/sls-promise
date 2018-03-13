@@ -15,21 +15,22 @@ $ npm install --save sls-promise
 ```js
 var slsp = require('sls-promise')
 
-// By default, treats return value as the body of a response with
-// 200 status code content-type application/json
+// By default, treats return value as the body of a response.
+// Adds statusCode 200 and Content-Type application/json.
 exports.handler = slsp((event, context) => {
   return { some: 'json' }
 })
 
-// Treats this as a full response, not a json body.
+// Create a custom response with slsp.response() as return value.
 exports.withCustomResponse = slsp((event, context) => {
+  return slsp.response({
     statusCode: 204,
     body: null
   })
 })
 
-// Any rejected promise response will be treated as an error body
-// by default and given a statusCode 500.
+// By default, rejected promises response are treated as an error body.
+// statusCode 500 is added.
 exports.withRejectedPromise = slsp((event, context) => {
   throw new Error('this is not good')
 })
