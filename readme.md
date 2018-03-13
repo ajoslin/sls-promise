@@ -29,7 +29,7 @@ exports.withCustomResponse = slsp((event, context) => {
   })
 })
 
-// By default, rejected promises response are treated as an error body.
+// By default, rejected promise is treated as an error body.
 // statusCode 500 is added.
 exports.withRejectedPromise = slsp((event, context) => {
   throw new Error('this is not good')
