@@ -8,7 +8,9 @@ function slsPromised (handler) {
   return slsPromisedWrapper
 
   function slsPromisedWrapper (event, context, callback) {
-    return Promise.resolve()
+    // NOTE(ajoslin): Do NOT return the promise. Lambda has limited promise support
+    // and will treat it as a response.
+    Promise.resolve()
       .then(() => handler(event, context))
       .then(function handleSuccess (result) {
         if (!(result instanceof SlsCustomResponse)) {
