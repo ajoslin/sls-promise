@@ -1,7 +1,7 @@
 {
   "name": "sls-promise",
   "main": "index.js",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "Minimal promise-based responses for serverless. Return JSON or full response.",
   "license": "MIT",
   "repository": "ajoslin/sls-promise",
