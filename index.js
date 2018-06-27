@@ -2,6 +2,8 @@
 
 module.exports = slsPromised
 
+slsPromised.logError = console.error.bind(console)
+
 slsPromised.response = opts => new SlsCustomResponse(opts)
 
 function slsPromised (handler) {
@@ -20,6 +22,7 @@ function slsPromised (handler) {
         }
         callback(null, result)
       }, function handleError (result) {
+        slsPromised.logError(result)
         if (!(result instanceof Error)) {
           result = Object.assign(new Error(), {
             body: result || 'Interval Server Error'
