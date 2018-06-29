@@ -21,5 +21,8 @@
   "devDependencies": {
     "tape": "^4.0.0",
     "standard": "^7.0.0"
+  },
+  "dependencies": {
+    "caseless": "^0.12.0"
   }
 }
