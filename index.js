@@ -1,5 +1,7 @@
 'use strict'
 
+const caseless = require('caseless')
+
 module.exports = slsPromised
 
 slsPromised.response = opts => new SlsCustomResponse(opts)
@@ -31,6 +33,10 @@ function slsPromised (handler) {
         }
         if (result.message && !result.body) {
           result.body = result.message
+        }
+        if (/application\/json/.test(caseless(result.headers).get('content-type')) &&
+           typeof result.body !== 'string') {
+          result.body = JSON.stringify(result.body)
         }
         callback(null, result)
       })
