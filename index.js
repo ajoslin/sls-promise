@@ -41,7 +41,11 @@ function slsPromised (handler) {
            typeof result.body !== 'string') {
           result.body = JSON.stringify(result.body)
         }
-        callback(null, result)
+        callback(null, {
+          headers: result.headers,
+          body: result.body,
+          statusCode: result.statusCode
+        })
       })
   }
 }

@@ -63,3 +63,12 @@ test('error is always string', t => {
     t.end()
   })
 })
+
+test('error {body, statusCode, headers} only are returned', t => {
+  const fn = slsPromised(() => Promise.reject({ custom: 'object' }))
+  fn(null, null, (error, result) => {
+    t.notOk(error)
+    t.deepEqual(Object.keys(result).sort(), ['body', 'headers', 'statusCode'])
+    t.end()
+  })
+})
