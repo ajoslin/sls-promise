@@ -34,10 +34,6 @@ function slsPromised (handler) {
         if (result.message && !result.body) {
           result.body = result.message
         }
-        if (/application\/json/.test(caseless(result.headers).get('content-type') || '') &&
-           typeof result.body !== 'string') {
-          result.body = JSON.stringify(result.body)
-        }
         callback(null, {
           headers: result.headers,
           body: result.body,
@@ -49,10 +45,12 @@ function slsPromised (handler) {
 
 function SlsCustomResponse (opts) {
   this.statusCode = opts.statusCode || 200
-  this.headers = Object.assign({
-    'Content-Type': 'application/json'
-  }, opts.headers || {})
-  if (opts.body && this.headers['Content-Type'] === 'application/json' && typeof opts.body !== 'string') {
+  this.headers = opts.headers || {}
+
+  const caselessHeaders = caseless(this.headers)
+
+  caselessHeaders.set('Content-Type', 'application/json')
+  if (opts.body && /application.json/.test(caselessHeaders.get('Content-Type') || '') && typeof opts.body !== 'string') {
     this.body = JSON.stringify(opts.body)
   } else {
     this.body = opts.body

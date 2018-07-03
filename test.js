@@ -55,15 +55,6 @@ test('custom response', function (t) {
   })
 })
 
-test('error is always string', t => {
-  const fn = slsPromised(() => Promise.reject({ custom: 'object' }))
-  fn(null, null, (error, result) => {
-    t.notOk(error)
-    t.equal(result.body, '{"custom":"object"}')
-    t.end()
-  })
-})
-
 test('error {body, statusCode, headers} only are returned', t => {
   const fn = slsPromised(() => Promise.reject({ custom: 'object' }))
   fn(null, null, (error, result) => {
