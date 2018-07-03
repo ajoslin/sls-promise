@@ -21,22 +21,17 @@ function slsPromised (handler) {
           })
         }
         callback(null, result)
-      }, function handleError (result) {
-        if (!(result instanceof Error)) {
-          result = Object.assign(new Error(), {
-            body: result || 'Interval Server Error'
-          })
-        }
-        result.statusCode = result.statusCode || 500
-        result.headers = result.headers || {
+      }, function handleError (data) {
+        data = data || {}
+        const result = {}
+        result.statusCode = data.statusCode || 500
+        result.headers = data.headers || {
           'Content-Type': 'application/json'
         }
-        if (result.message && !result.body) {
-          result.body = result.message
-        }
+        result.body = data.body || data.message || JSON.stringify(data || {message: 'Internal Server Error'})
         callback(null, {
           headers: result.headers,
-          body: result.body,
+          body: result.body || {message: 'Internal Server Error'},
           statusCode: result.statusCode
         })
       })

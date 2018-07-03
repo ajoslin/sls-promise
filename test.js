@@ -32,7 +32,7 @@ test('normal error', function (t) {
     t.notOk(error)
     t.deepEqual(JSON.parse(JSON.stringify(result)), {
       statusCode: 500,
-      body: 'error',
+      body: '"error"',
       headers: {
         'Content-Type': 'application/json'
       }
