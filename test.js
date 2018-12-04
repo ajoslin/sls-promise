@@ -24,6 +24,33 @@ test('normal res', function (t) {
   })
 })
 
+test('custom content-type headers', function (t) {
+  const event = {}
+  const context = {}
+  const fn = slsPromised((e, c) => {
+    t.equal(e, event)
+    t.equal(c, context)
+    return slsPromised.response({
+      headers: {
+        'Content-Type': 'text/html'
+      },
+      statusCode: 111,
+      body: 'some html'
+    })
+  })
+  fn(event, context, (error, result) => {
+    t.notOk(error)
+    t.deepEqual(result, {
+      statusCode: 111,
+      body: 'some html',
+      headers: {
+        'Content-Type': 'text/html'
+      }
+    })
+    t.end()
+  })
+})
+
 test('normal error', function (t) {
   const fn = slsPromised(() => {
     throw 'error' // eslint-disable-line

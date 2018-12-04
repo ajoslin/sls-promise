@@ -44,7 +44,10 @@ function SlsCustomResponse (opts) {
 
   const caselessHeaders = caseless(this.headers)
 
-  caselessHeaders.set('Content-Type', 'application/json')
+  if (!caselessHeaders.get('Content-Type')) {
+    caselessHeaders.set('Content-Type', 'application/json')
+  }
+
   if (opts.body && /application.json/.test(caselessHeaders.get('Content-Type') || '') && typeof opts.body !== 'string') {
     this.body = JSON.stringify(opts.body)
   } else {
